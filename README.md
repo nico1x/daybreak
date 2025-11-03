@@ -1,0 +1,1 @@
+Sample project built using NextJS and Django

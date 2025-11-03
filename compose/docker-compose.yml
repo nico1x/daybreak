@@ -1,0 +1,59 @@
+name: daybreak
+
+services:
+  backend:
+    build:
+      context: ../
+      dockerfile: ./compose/backend/Dockerfile
+    env_file:
+      - ../.envs/.backend.env
+    ports:
+      - 8001:8001
+    volumes:
+      - type: bind
+        source: ./backend/entrypoint.sh
+        target: /bin/entrypoint.sh
+      - type: bind
+        source: ../backend
+        target: /app
+    depends_on:
+      - postgres
+      - redis
+    command: /bin/entrypoint.sh
+
+  frontend:
+    image: node:25-alpine
+    env_file:
+      - ../.envs/.frontend.env
+    ports:
+      - 3030:3000
+    volumes:
+      - type: bind
+        source: ../frontend
+        target: /app
+    depends_on:
+      - backend
+    working_dir: /app
+    command: yarn run dev
+
+  postgres:
+    image: postgres:17
+    restart: always
+    env_file:
+      - ../.envs/.postgres.env
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init/:/docker-entrypoint-initdb.d/
+
+  redis:
+    image: redis:8
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data: {}
+  redis_data: {}

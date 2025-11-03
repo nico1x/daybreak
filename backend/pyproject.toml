@@ -1,0 +1,20 @@
+[project]
+name = "daybreak"
+version = "0.1.0"
+description = "backend for daybreak"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name = "npineda" },
+]
+requires-python = ">=3.13"
+dependencies = [
+    "django>=5.2.7",
+    "django-environ>=0.12.0",
+    "psycopg2>=2.9.11",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.3",
+]
