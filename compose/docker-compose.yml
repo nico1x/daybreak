@@ -5,8 +5,16 @@ services:
     build:
       context: ../
       dockerfile: ./compose/backend/Dockerfile
+    environment:
+      DEBUG: True
+      DJANGO_SECRET_KEY: django-secret-d4ybr34k
+      DATABASE_HOST: postgres
+      DATABASE_NAME: daybreak
+      DATABASE_USER: daybreak
+      DATABASE_PASSWORD: p4ssw0rd
     env_file:
-      - ../.envs/.backend.env
+      - path: ../.envs/.backend.env
+        required: false
     ports:
       - 8001:8001
     volumes:
@@ -24,7 +32,8 @@ services:
   frontend:
     image: node:25-alpine
     env_file:
-      - ../.envs/.frontend.env
+      - path: ../.envs/.frontend.env
+        required: false
     ports:
       - 3030:3000
     volumes:
@@ -39,8 +48,10 @@ services:
   postgres:
     image: postgres:17
     restart: always
-    env_file:
-      - ../.envs/.postgres.env
+    environment:
+      POSTGRES_DB: daybreak
+      POSTGRES_USER: daybreak
+      POSTGRES_PASSWORD: p4ssw0rd
     ports:
       - 5432:5432
     volumes:

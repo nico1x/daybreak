@@ -2,7 +2,7 @@
 
 set -eu
 
-# Bootstrap as superadmin needed
+# Bootstrap superadmin as needed
 test_superuser='
 from django.contrib.auth import get_user_model;
 get_user_model().objects.get(username="admin");
