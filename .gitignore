@@ -279,3 +279,5 @@ daybreak/media/
 
 .ruff_cache/
 .next/
+
+claude-config/

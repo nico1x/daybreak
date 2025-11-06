@@ -1,0 +1,24 @@
+services:
+  claude-code:
+    stdin_open: true
+    tty: true
+    build:
+        context: ./claude-code
+        dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ../.
+        target: /project
+      - type: bind
+        source: ./claude-code/claude-config
+        target: /claude
+      - type: bind
+        source: ./claude-code/entrypoint.sh
+        target: /bin/entrypoint.sh
+    environment:
+      CLAUDE_CONFIG_DIR: /claude
+    profiles:
+      - tools
+    working_dir: /project
+    entrypoint: /bin/entrypoint.sh
+    command: claude

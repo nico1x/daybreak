@@ -5,13 +5,22 @@ A sample project built using NextJS and Django
 
 ### Run the containers
 ```bash
-$ docker compose -f ./compose/docker-compose.yml up -d
-```
-or
-```bash
 $ cd compose
 $ docker compose up -d
 ```
+
+---
+
+### Run and attach claude-code
+```bash
+$ cd compose
+$ docker compose up -d claude-code && docker compose attach claude-code
+```
+
+Login as required
+
+
+---
 
 ### View in browser
 
