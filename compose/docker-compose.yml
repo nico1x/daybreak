@@ -18,12 +18,8 @@ services:
     ports:
       - 8001:8001
     volumes:
-      - type: bind
-        source: ./backend/entrypoint.sh
-        target: /bin/entrypoint.sh
-      - type: bind
-        source: ../backend
-        target: /app
+      - ../backend:/app
+      - ./backend/entrypoint.sh:/bin/entrypoint.sh:ro
     depends_on:
       - postgres
       - redis
@@ -37,9 +33,7 @@ services:
     ports:
       - 3030:3000
     volumes:
-      - type: bind
-        source: ../frontend
-        target: /app
+      - ../frontend:/app
     depends_on:
       - backend
     working_dir: /app

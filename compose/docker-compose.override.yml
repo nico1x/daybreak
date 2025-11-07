@@ -6,15 +6,9 @@ services:
         context: ./claude-code
         dockerfile: Dockerfile
     volumes:
-      - type: bind
-        source: ../.
-        target: /project
-      - type: bind
-        source: ./claude-code/claude-config
-        target: /claude
-      - type: bind
-        source: ./claude-code/entrypoint.sh
-        target: /bin/entrypoint.sh
+      - ../.:/project
+      - ./claude-code/claude-config:/claude
+      - ./claude-code/entrypoint.sh:/bin/entrypoint.sh:ro
     environment:
       CLAUDE_CONFIG_DIR: /claude
     profiles:
