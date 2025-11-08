@@ -2,17 +2,30 @@ services:
   claude-code:
     stdin_open: true
     tty: true
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
     build:
         context: ./claude-code
         dockerfile: Dockerfile
     volumes:
-      - ../.:/project
+      - ../.:/workspace
       - ./claude-code/claude-config:/claude
-      - ./claude-code/entrypoint.sh:/bin/entrypoint.sh:ro
+      - bash_history_data:/commandhistory
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      NODE_OPTIONS: --max-old-space-size=4096
       CLAUDE_CONFIG_DIR: /claude
+      POWERLEVEL9K_DISABLE_GITSTATUS: true
     profiles:
       - tools
-    working_dir: /project
-    entrypoint: /bin/entrypoint.sh
-    command: claude
+    working_dir: /workspace
+    command: claude 
+    post_start:
+      - command: sudo /usr/local/bin/init-firewall.sh
+        user: root
+      - command: sudo /usr/local/bin/init-docker-sock.sh
+        user: root
+
+volumes:
+  bash_history_data: {}
