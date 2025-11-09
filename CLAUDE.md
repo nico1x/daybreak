@@ -2,6 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Plan & Review
+### Before starting work
+- Always start in plan mode to make a plan
+- After generating the plan, make sure you Write the plan to .claude/tasks/TASK_NAME.md.
+- The plan should be a detailed implementation plan and the reasoning behind them, as well as tasks broken down.
+- If the task requires external knowledge or certain package, also research to get latest knowledge (Use Task tool for research)
+- Don't over plan it, always think MVP.
+- Once you write the plan, firstly ask me to review it. Do not continue until I approve the plan.
+
+### While implementing
+- You should update the plan as you work.
+- After you complete tasks in the plan, you should update and append detailed descriptions of the changes you made, so following tasks can be easily hand over to other engineers.
+
 ## Project Overview
 
 Daybreak is a full-stack portfolio application demonstrating advanced proficiency in modern web development. Built with Next.js 16 for the frontend and Django 5 for the backend, it runs in a containerized environment orchestrated with Docker Compose. The application showcases scalable architecture, real-time interactivity, and distributed systems design.

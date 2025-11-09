@@ -303,3 +303,4 @@ next-env.d.ts
 # Claude code
 claude-config/
 commandhistory/
+.claude/

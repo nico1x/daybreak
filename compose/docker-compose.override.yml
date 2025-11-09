@@ -20,7 +20,7 @@ services:
     profiles:
       - tools
     working_dir: /workspace
-    command: claude 
+    command: claude
     post_start:
       - command: sudo /usr/local/bin/init-firewall.sh
         user: root
